@@ -1,4 +1,7 @@
 apiVersion: apps/v1
+{{- $podAnnotations := .Values.podAnnotations }}
+{{- $secretAnnotation := dict "checksum/secret" (include (print $.Template.BasePath "/secrets.yaml") . | sha256sum) }}
+{{- $podAnnotations := merge $podAnnotations $secretAnnotation }}
 kind: Deployment
 metadata:
   name: {{ include "mautrix-instagram.fullname" . }}
@@ -26,13 +29,12 @@ spec:
     metadata:
       labels:
         {{- include "mautrix-instagram.selectorLabels" . | nindent 8 }}
+      {{- if $podAnnotations }}
       annotations:
-        checksum/secret: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
-        {{- if .Values.podAnnotations }}
-        {{- range $key, $value := .Values.podAnnotations }}
+        {{- range $key, $value := $podAnnotations }}
         {{ $key }}: {{ $value | quote }}
         {{- end }}
-        {{- end }}
+      {{- end }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

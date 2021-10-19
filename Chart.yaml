@@ -1,17 +1,24 @@
 apiVersion: v2
 type: application
 appVersion: latest
-description: A Matrix-Signal puppeting bridge.
+description: A Matrix-Instagram puppeting bridge.
 name: mautrix-instagram
-version: 0.0.1
+version: 1.0.0
 keywords:
   - synapse
   - chat
   - matrix
   - instagram
-home: https://github.com/tulir/mautrix-instagram
+home: https://matrix.to/#/#instagram:maunium.net
 sources:
-  - https://github.com/matrix-org/synapse
+  - https://github.com/mautrix/instagram
 maintainers:
   - name: Gavin Mogan
     email: helm@gavinmogan.com
+annotations:
+  artifacthub.io/changes: |
+    - Initial version with latest templates
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/images: |
+    - name: instagram
+      image: dock.mau.dev/mautrix/instagram:latest
