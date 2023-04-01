@@ -4,6 +4,10 @@
 
 replicaCount: 1
 
+strategy:
+  type: Recreate
+  rollingUpdates: null
+
 image:
   repository: dock.mau.dev/mautrix/instagram
   tag: "{{ .Chart.AppVersion }}"
@@ -23,11 +27,11 @@ serviceAccount:
   name:
 
 podSecurityContext:
-  {}
-  # fsGroup: 2000
+  fsGroup: 1000
 
 securityContext:
-  {}
+  runAsUser: 1000
+  runAsGroup: 1000
   # privileged: true
   # capabilities:
   #   drop:

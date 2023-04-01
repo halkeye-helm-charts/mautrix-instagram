@@ -47,32 +47,18 @@ spec:
       dnsConfig:
         {{- toYaml .Values.dnsConfig | nindent 8 }}
       {{- end }}
-      initContainers:
-        - name: init
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/sh"]
-          args:
-            - "-c"
-            - |-
-              set -ex
-              cp /config/*.yaml /data/
-              #chown {{.Values.uid}}:{{.Values.gid}} -R /data
-          volumeMounts:
-            - name: data
-              mountPath: /data
-            - name: config
-              mountPath: /config
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
       containers:
         - name: mautrix-instagram
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - python3
+            - -m
+            - mautrix_instagram
+            - -c
+            - /config/config.yaml
           ports:
             - name: http
               containerPort: {{ required "need config.appservice.port" .Values.config.appservice.port }}
@@ -100,19 +86,11 @@ spec:
             failureThreshold: {{ .Values.probes.startup.failureThreshold }}
             periodSeconds: {{ .Values.probes.startup.periodSeconds }}
 {{- end }}
-          volumeMounts:
-            - name: data
-              mountPath: /data
-            - name: config
-              mountPath: /config
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      volumes:
-        - name: config
-          secret:
-            secretName: {{ include "mautrix-instagram.fullname" . }}
-        - name: data
-          emptyDir: {}
+          volumeMounts:
+            - name: config
+              mountPath: /config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -125,3 +103,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      volumes:
+        - name: config
+          secret:
+            secretName: {{ include "mautrix-instagram.fullname" . }}
