@@ -1,6 +1,6 @@
 apiVersion: v2
 type: application
-appVersion: v0.1.3
+appVersion: latest
 description: A Matrix-Instagram puppeting bridge.
 name: mautrix-instagram
 version: 1.0.1

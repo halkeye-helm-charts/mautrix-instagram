@@ -18,10 +18,10 @@
     },
     {
       "fileMatch": [
-        "^Chart.yaml$"
+        "^values.yaml$"
       ],
       "matchStrings": [
-        "appVersion:\\s+\"(?<currentValue>v[a-z0-9.-]+)\""
+        "tag:\\s+\"(?<currentDigest>sha256:[a-f0-9]+)\""
       ],
       "depNameTemplate": "dock.mau.dev/mautrix/instagram",
       "datasourceTemplate": "docker",
