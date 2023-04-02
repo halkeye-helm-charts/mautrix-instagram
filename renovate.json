@@ -21,7 +21,7 @@
         "^values.yaml$"
       ],
       "matchStrings": [
-        "tag:\\s+\"(?<currentDigest>sha256:[a-f0-9]+)\""
+        "tag:\\s+\"(?<currentValue>v[a-z0-9.-]+)@(?<currentDigest>sha256:[a-f0-9]+)\""
       ],
       "depNameTemplate": "dock.mau.dev/mautrix/instagram",
       "datasourceTemplate": "docker",

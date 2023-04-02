@@ -10,7 +10,7 @@ strategy:
 
 image:
   repository: dock.mau.dev/mautrix/instagram
-  tag: "sha256:62ee8eb7ed5346d18e18a7a1795b4cbd67b391dee16481aa4ed22e3824d50bac"
+  tag: "latest@sha256:62ee8eb7ed5346d18e18a7a1795b4cbd67b391dee16481aa4ed22e3824d50bac"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
