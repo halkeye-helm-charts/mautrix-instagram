@@ -3,7 +3,7 @@ type: application
 appVersion: latest
 description: A Matrix-Instagram puppeting bridge.
 name: mautrix-instagram
-version: 1.0.1
+version: 1.0.2
 keywords:
   - synapse
   - chat
@@ -17,7 +17,7 @@ maintainers:
     email: helm@gavinmogan.com
 annotations:
   artifacthub.io/changes: |2
-     - "Some local changes i've had for a while 🤞 ([11fafbf](https://github.com/halkeye-helm-charts/mautrix-instagram/commit/11fafbfcc005346960364dad364a60fb81cd833d))"
+     - "use latest with sha so renovate can still trigger updates ([42ca789](https://github.com/halkeye-helm-charts/mautrix-instagram/commit/42ca789749f9004f9d6b8528ce34a08ef263c68e))"
   artifacthub.io/containsSecurityUpdates: 'false'
   artifacthub.io/images: |
     - name: instagram
